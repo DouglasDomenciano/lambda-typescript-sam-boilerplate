@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "module": "CommonJS",
+    "target": "ES6",
+    "strict": true,
+    "baseUrl": "./exampleLambda", 
+    "paths": {
+      "/opt/nodejs/mysqlConection": ["../layers/nodejs/node_modules/mysqlConection"]  // Mapeia para uma pasta local
+    }
+  },
+  "include": ["exampleLambda/*.ts"],
+  "exclude": ["node_modules"]
+}

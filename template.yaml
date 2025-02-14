@@ -1,0 +1,33 @@
+Resources:
+    APIGateway:
+        Type: AWS::Serverless::Api
+        Properties:
+            StageName: dev
+    MysqlLayer:
+        Type: AWS::Serverless::LayerVersion
+        Properties:
+            LayerName: mysql-layer
+            Description: "Layer com MySQL e conexão"
+            ContentUri: ./layers
+            CompatibleRuntimes:
+                - nodejs18.x
+    ExampleLambda:
+        Type: AWS::Serverless::Function
+        Properties:
+            CodeUri: ./exampleLambda
+            Handler: index.handler
+            Runtime: nodejs18.x
+            MemorySize: 256
+            Timeout: 10
+            Layers:
+                - !Ref MysqlLayer
+            Environment:
+                Variables:
+                    HELLO_TABLE_NAME: !Ref ExampleTable
+            Events:
+                Api:
+                    Type: Api
+                    Properties:
+                        Path: /exampleLambda
+                        Method: GET
+                        RestApiId: !Ref APIGateway
