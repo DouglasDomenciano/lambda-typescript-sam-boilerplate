@@ -4,10 +4,10 @@
   "description": "Boilerplate of Lambda function using typescript, layers and sam to local test and deploy",
   "main": ".eslintrc.js",
   "scripts": {
-    "compile": "tsc --project tsconfig.json",
-    "sam-build" : "sam build --cached",
+    "compile": "npx tsc --project tsconfig.json",
+    "sam-build": "npx nodemon --ext ts,js,json,yaml --exec 'sam build --cached'",
     "sam-local-api": "sam local start-api --warm-containers EAGER",
-    "dev": "yarn run compile && yarn run sam-build && yarn run sam-local-api"
+    "dev": "concurrently \"yarn run compile\" \"yarn run sam-build\" \"yarn run sam-local-api\""
   },
   "keywords": [],
   "author": "",
@@ -21,7 +21,9 @@
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
-    "tsc": "^2.0.4",
     "typescript": "~5.6.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }
