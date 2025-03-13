@@ -5,7 +5,7 @@
   "main": ".eslintrc.js",
   "scripts": {
     "compile": "npx tsc --project tsconfig.json",
-    "sam-build": "npx nodemon --ext ts,js,json,yaml --exec 'sam build --cached'",
+    "sam-build": "npx nodemon --ext ts,js,json,yaml --exec \"sam build --cached\"",
     "sam-local-api": "sam local start-api --warm-containers EAGER",
     "dev": "concurrently \"yarn run compile\" \"yarn run sam-build\" \"yarn run sam-local-api\""
   },
